@@ -1,3 +1,3 @@
 layout: page
-title: "About me"
+title: About me
 permalink: /about
