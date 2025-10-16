@@ -1,0 +1,70 @@
+<style>
+.floating-toc {
+  position: fixed;
+  top: 120px;
+  left: 30px;  /* Changed from right to left */
+  width: 280px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #159957;
+  border-radius: 8px;
+  padding: 20px;
+  font-size: 13px;
+  max-height: 65vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 999;
+}
+
+.floating-toc h3 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #159957;
+  text-align: center;
+  border-bottom: 1px solid #159957;
+  padding-bottom: 8px;
+}
+
+.floating-toc ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.floating-toc a {
+  color: #333;
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.floating-toc a:hover {
+  color: #159957;
+}
+
+@media (max-width: 1024px) {
+  .floating-toc { display: none; }
+}
+</style>
+
+<div class="floating-toc">
+  <h3>Contents</h3>
+  <div class="toc-content">
+    <!-- The TOC will be inserted here by Jekyll -->
+  </div>
+</div>
+
+<!-- TOC must be outside HTML for kramdown to process it -->
+<div style="display: none;" class="hidden-toc">
+* TOC
+{:toc}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Move the generated TOC into our styled container
+  var hiddenToc = document.querySelector('.hidden-toc ul');
+  var tocContainer = document.querySelector('.toc-content');
+  if (hiddenToc && tocContainer) {
+    tocContainer.appendChild(hiddenToc);
+  }
+});
+</script>
