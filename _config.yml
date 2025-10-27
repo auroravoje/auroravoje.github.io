@@ -18,10 +18,10 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Aurora's data science
+title: Aurora's AI and data science page
 email: auroravoje@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Welcome to my page about AI and data science.
+  Welcome to Aurora Voje's page on AI and data science.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://auroravoje.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: auroravoje
