@@ -392,7 +392,7 @@ All best 🩵!
 /* Fix for GitHub Pages theme conflicts */
 .main-carousel .flickity-viewport {
   height: auto !important;
-  min-height: 350px;
+  min-height: 450px;
 }
 
 .main-carousel .flickity-slider {
