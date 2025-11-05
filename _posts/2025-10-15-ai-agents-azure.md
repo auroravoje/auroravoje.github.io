@@ -380,7 +380,7 @@ All best 🩵!
 }
 
 .carousel-cell img:hover {
-  transform: scale(1.25);
+  transform: scale(1.5);
 }
 
 .carousel-cell p {
