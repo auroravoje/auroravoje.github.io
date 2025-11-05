@@ -3,10 +3,19 @@ layout: default
 title:  "How to build AI agents in Azure AI Foundry"
 date:   2025-10-15 14:29:17 +0200
 categories: AI agents Azure
+author: Aurora Voje, PhD
+---
+![Build home for AI agent]({{ site.baseurl }}/assets/images/2025-10-15-ai-agents-azure/intro_ai_agents_people.png)
+_Figure: AI generated illustration of article's title._
+
+---
+**[{{ site.title }}]({{ site.url }})** | By {{ page.author | default: "Aurora Voje" }} | {{ page.date | date: "%B %d, %Y" }}
+
 ---
 
 * TOC
 {:toc}
+
 
 # Introducing AI Agents to the People!
 {:top}
@@ -68,7 +77,7 @@ The history sheet has the following table:
 |Year | Week         | Day    |Recipe |
 |:----|:-------------|:-------|:------|
 |2025 | 1            | 1      | Salmon with roasted vegetables  |
-|2025 | 2            | 2      | Sweet potato soup with fresh bread  |
+|2025 | 1            | 2      | Sweet potato soup with fresh bread  |
 
 By the agentic definitions above, we then have the following setup:
 
@@ -93,8 +102,8 @@ This is, of course, a simple use case, but I hope you can easily contemplate ana
 
 # Development stages
 
-- No Code: Create agent in AI Foundry Portal and test it in playground (this post)
-- Low Code: Build a home for the agent in a Streamlit app (upcoming post)
+- **No Code: Create agent in AI Foundry Portal and test it in playground (this post)**
+- Azure AI Foundry Portal and Code: Build a home for the agent in a Streamlit app (upcoming post)
 - Only Code: Build an agent system in Python with Azure SDK and Streamlit app (upcoming post)
 - Deployment: Deploy the app with Azure Web Apps (upcoming post)
 
@@ -288,22 +297,28 @@ Select the agent you have created and take it for a little chat. Below you can s
 <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "wrapAround": true }'>
   <div class="carousel-cell">
     <img src="{{ site.baseurl }}/assets/images/2025-10-15-ai-agents-azure/9_az_agent_chat.png" alt="Step 1">
-    <p>Ask for agent instructions</p>
+    <p>1. Ask for agent instructions</p>
   </div>
   
   <div class="carousel-cell">
     <img src="{{ site.baseurl }}/assets/images/2025-10-15-ai-agents-azure/10_az_agent_chat.png" alt="Step 2">
-    <p>Ask for a plan with specific additional detail requests</p>
+    <p>2. Ask for a plan with specific additional detail requests</p>
   </div>
   
   <div class="carousel-cell">
     <img src="{{ site.baseurl }}/assets/images/2025-10-15-ai-agents-azure/11_az_agent_chat.png" alt="Step 3">
-    <p>Ask to see the shopping list</p>
+    <p>3. Ask to see the shopping list</p>
+  </div>
+
+  <div class="carousel-cell">
+    <img src="{{ site.baseurl }}/assets/images/2025-10-15-ai-agents-azure/12_az_agent_chat.png" alt="Step 4">
+    <p>4. Ask to send dinner plan and shopping list by email</p>
   </div>
 </div>
 
+* * *
 
-
+The agent passed all my tests and I am quite happy with the results 🤖😃! 
 
 
 
@@ -323,7 +338,14 @@ I first wanted to add the Sharepoint (preview) tool, as I wanted the agent to be
 Here I got stuck in preview features not working as intended, excel file format not yet being supportetd, in addition to corporate file access and firewall restrictions,
 as I am working on my company-mac. However, I did manage to solve this by some creativity, see my upcoming posts on how I solved the issue of connection to a live spreadsheet instead of static files.
 
-Email did not always work in playground as it should. Need to figure out what is wrong.
+The email-tool did not always work as it should. At some point I started getting email trigger errors and `BadRequest, HTTP request failed` errors. I figured out that I had to re-authenticate with my newly reset password for work SSO inside the email logic app setup (the Azure subscription is through my work). This was not quite intuitive, as the error did not clearly state the authentication error. I did not take long to figure out, but I think for inexperienced users, this could potentially be a challenge.  
+
+Possible difficulties with Azure subscription and Role Based Access Control RBAC for Azure AI Foundry setup. For one of my subscriptions all access was set by default (Azure AI User and Owner). For my team's data science group subscription (which is a bit different than my personal work subscription, it's another tenant setup) the necessary RBAC configuration was not set by default, which resulted in lack of possibility of building AI-agents in AI Foundry, which is the main purpose of the setup. So beware of the RBAC in you Azure AI Foundry resource setup. 
+
+So if you run into similar trouble, try the following:
+- Ask the Foundry Agent (portal assistant) for help
+- Check your Azure AI Foudnry RBAC setup, see [Azure documentatiton on Role-based access control for Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/rbac-azure-ai-foundry#manage-access-with-roles-for-projects) for details.
+
 
 I hope you got a great quickstart on the subject and see you in my next post, expected in November 2025.
 All best 🩵! 
@@ -348,7 +370,7 @@ All best 🩵!
 }
 
 .carousel-cell img:hover {
-  transform: scale(1.15);
+  transform: scale(1.25);
 }
 </style>
 
