@@ -288,7 +288,7 @@ if is_local():
     load_dotenv()
 ```
 
-As mentioned in the package imports and setup section, the function above serves for environment detection, local or remote.
+As mentioned in the package imports and setup section, the `is_local()` function serves for environment detection, local or remote.
 
 ```python
 #utils.py
@@ -327,7 +327,7 @@ def send_user_message(client: AIProjectClient, agent_id: str, user_message: str)
     return st.session_state.get('thread_id'), st.session_state.get('run_id')
 ```
 
-This function implements the Azure Python SDK methods described in the [documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/quickstarts/get-started-code?tabs=python) to connect to the given agent,
+The `send_message_user()` function implements the Azure Python SDK methods described in the [Azure documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/quickstarts/get-started-code?tabs=python) to connect to the given agent,
 create a new thread and run and returns the `thread_id` and `run_id` back to the main app function. 
 
 
@@ -357,7 +357,8 @@ def get_responses(client: AIProjectClient, thread_id: str, run_id: str) -> List[
     return responses
 ```
 
-Explanatory text
+The `get_responses()` function creates a list of messages in the current `run_id` and `thread_id`, appends message if there is one and returns the list of agent responses.
+
 
 ```python
 #utils.py
@@ -379,9 +380,9 @@ def safe_rerun() -> None:
         # last-resort fallback
         st.stop()
 ```
-This function ensures a safe re-run of the application when the user clicks the 
-`Reset conversation` button in the left sidebar panel.
 
+The `safe_rerun()` function ensures a safe re-run of the application when the user clicks the 
+`Reset conversation` button in the left sidebar panel.
 
 </details>
 
@@ -395,15 +396,13 @@ This function ensures a safe re-run of the application when the user clicks the
 
 In order to connect to the correct Azure AI Foundry project and to the correct agent within the project, we need two evironment variables:
 
-* Azure AI Foundry project endpoint: called `dingen_azure_endpoint` in my code.
-* Azure AI Foundry Agent id: called `dingen_agent_id` in my code.
+* Azure AI Foundry project endpoint: in my code called `dingen_azure_endpoint`.
+* Azure AI Foundry Agent id: in my code called `dingen_agent_id`.
 
 The `dingen` is abbreviation for dinner generator.
 
 
 In the Azure AI Foundry portal you find the endpoint and id values here:
-**consider adding carousel**
-
 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
@@ -420,7 +419,8 @@ In the Azure AI Foundry portal you find the endpoint and id values here:
 </div>
 
 
-Copy and paste them into your `.env` file in root directory.
+Copy and paste them into your `.env` file in root directory, so the `is_local()` function finds the 
+environment variables on app run.
 
 
 ```python
@@ -447,10 +447,12 @@ _Figure: Final result of the prototype application with initial agent interactio
 
 # First impression of Azure Python SDK state of maturity and further steps
 
+What worked well:
+
 - Easy to get started
 - Decent code documentation for Python
-- A lot of available information and opprotunities
-- Code runs work as intended. At this stage did not experience bugs and glitches
+- A lot of available information and opprotunities for versatile agent capabilities
+- The code runs as intended. At this stage I did not experience bugs or glitches.
 
 Difficulties I ran into:
 
@@ -502,7 +504,7 @@ Difficulties I ran into:
 /* Fix for GitHub Pages theme conflicts */
 .main-carousel .flickity-viewport {
   height: auto !important;
-  min-height: 350px;
+  min-height: 500px;
 }
 
 .main-carousel .flickity-slider {
