@@ -330,7 +330,7 @@ What worked well:
 - Intuitive UI setup in AI Foundry, you don't always need a tutorial to understand where you need to go,
  and what buttons to press.
 
-What could be better:
+Difficulties I ran into:
 
 Connecting to live documents:
 
@@ -351,6 +351,12 @@ I hope you got a great quickstart on the subject and see you in my next post, ex
 All best 🩵! 
 
 ---
+
+*Transparency note: This article is human-written with AI assistance for proofreading and typo correction. Main image generated with AI.*
+
+---
+
+
 
 **[🔝 Back to top 🔝](#top)**
 

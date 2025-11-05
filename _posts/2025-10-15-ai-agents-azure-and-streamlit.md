@@ -452,7 +452,7 @@ _Figure: Final result of the prototype application with initial agent interactio
 - A lot of available information and opprotunities
 - Code runs work as intended. At this stage did not experience bugs and glitches
 
-What could be better:
+Difficulties I ran into:
 
 - Nothing to mention at this stage.
 
