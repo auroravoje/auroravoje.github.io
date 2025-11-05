@@ -26,16 +26,16 @@ The tech community seems to be hyping about AI agents at the moment. All the big
 - What is Azure AI Foundry?
 - How to build an AI agent in the Azure AI Foundry portal?
 
-If you're new to the subject, check out the post to read up on this background information. I also introduced arguments for why I started with Microsoft, and need to stress again that similar agentic frameworks are provided by [Google Cloud](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/agent-builder/overview), [AWS](https://aws.amazon.com/bedrock/agents/), and other providers, and it's surely beneficial to check those out as well. Hence this article is not an advertisement for any specific provider. 
+If you're new to the subject, check out the post to read up on this background information. I also introduced arguments for why I started with Microsoft, and need to stress again that similar agentic frameworks are provided by [Google Cloud](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/agent-builder/overview), [AWS](https://aws.amazon.com/bedrock/agents/), and other providers, and it's surely beneficial to check those out as well. Hence, this article is not an advertisement for any specific provider. This is just what was easily available to me, and I plan on looking into more providers myself. Possibly a comparison post will appear in the future.  
 
 
 
-In this post I move forward and "build a house" for the AI agent, in terms of an app interface, separate from Azure AI Foundry Playground. There are so many wonderful front-end frameworks to choose from. As this is a data science/AI post for Python, Streamlit is an excellent application framework to start with to quickly get up and running a prototype app.
+In this post I move forward and "build a house" for the AI agent, in terms of an app interface, separate from the Azure AI Foundry Playground. There are so many wonderful front-end frameworks to choose from. As this is a data science/AI post for Python, Streamlit is an excellent application framework to start with to quickly get up and running with a prototype app.
 
 
 
 **In upcoming posts** I will further show how to:
-- Post: [Build an agent system in Python with Azure SDK and Streamlit app]({% post_url 2025-10-27-ai-agents-azure-python-sdk %}). Here I will also touch upon "A2A" - i.e., connecting several agents 
+- Post: [Build an agent system in Python with Azure SDK and Streamlit app]({% post_url 2025-10-27-ai-agents-azure-python-sdk %}). Here I will build an AI agent with code and also touch upon "A2A" - i.e., connecting several agents. 
 - Post: [Agent application deployment with Azure Web Apps]({% post_url 2025-10-27-ai-agents-azure-web-app %}) is a tutorial on how to deploy the app I'm building so other users can reach it.
 
 * * *
@@ -82,26 +82,26 @@ By the agentic definitions discussed in [my previous post]({% post_url 2025-10-1
 This is, of course, a simple use case, but I hope you can easily contemplate analogies to real solutions and real business use case challenges. 
 
 ## Development stages
-- No Code: Create agent in AI Foundry Portal and test it in playground (previous post)
+- No Code: Create agent in AI Foundry Portal and test it in playground ([previous post]({% post_url 2025-10-15-ai-agents-azure %}))
 - **AI Foundry Portal and Code: Build a home for the agent in a Streamlit app (this post)**
-- Only Code: Build an agent system in Python with Azure SDK and Streamlit app (upcoming post)
-- Deployment: Agent application deployment with Azure Web Apps (upcoming post)
+- Only Code: Build an agent system in Python with Azure SDK and Streamlit app ([upcoming post]({% post_url 2025-10-27-ai-agents-azure-python-sdk %}))
+- Deployment: Agent application deployment with Azure Web Apps ([upcoming post]({% post_url 2025-10-27-ai-agents-azure-web-app %}))
 
 
 * * *
 
-# Housing the AI-agent in a streamlit app 
-In the previous post I created the dinner planning agent in Azure AI Foundry Portal. Now that the agent is tested and working well in the portal playground, I will build an application environment in order to interact with the agent. In a real setting a customer would not be able to log into developer's Azure AI Foundry portal. The scope of the current post is a setup with Streamlit on `localhost`.
+# Housing the AI agent in a Streamlit app 
+In the previous post, I created the dinner planning agent in Azure AI Foundry Portal. Now that the agent is tested and working well in the portal playground, I will build an application environment in order to interact with the agent. In a real setting, a customer would not be able to log into the developer's Azure AI Foundry portal. The scope of the current post is a setup with Streamlit on `localhost`.
 
   
 ## Combining Streamlit and Azure Python SDK chat functionality
 
-If you have never tried Streamlit apps before, I highly recommend to go through their introductory and chat-app tutorials as a prerequisite for the upcoming code:
+If you have never tried Streamlit apps before, I highly recommend going through their introductory and chat-app tutorials as a prerequisite for the upcoming code:
 
 - [Create a Streamlit app](https://docs.streamlit.io/get-started/tutorials/create-an-app)  
 - [Build a basic LLM chat app with Streamlit](https://docs.streamlit.io/develop/tutorials/chat-and-llm-apps/build-conversational-apps)
 
-I also recommend to have a look at the Azure AI Foundry documentation on how to interact
+I also recommend having a look at the Azure AI Foundry documentation on how to interact
 with an AI agent in Python. Read through the sections below when the Python tab is chosen:
 
 - [Quickstart: Get started with Azure AI Foundry (Foundry projects)](https://learn.microsoft.com/en-us/azure/ai-foundry/quickstarts/get-started-code?tabs=python) with focus on
@@ -113,15 +113,16 @@ with an AI agent in Python. Read through the sections below when the Python tab 
 
 ## Application Code
 
-You can find the entire codebase in this [link to Gitthub repo](https://github.com/auroravoje/ai-agent/tree/sme-version).
+You can find the entire codebase in this [link to my Github repo](https://github.com/auroravoje/ai-agent/tree/sme-version).
 
-I assume you know how to set up python environments. If not, check out these links. The choice depends on your purpose and preferences.
+I assume you know how to set up Python environments. If not, check out these links. The choice depends on your purpose and preferences.
 
 - [Creation of virtual environments with venv](https://docs.python.org/3/library/venv.html)
 - [Managing Multiple Python Versions With pyenv](https://realpython.com/intro-to-pyenv/)
 - [Poetry](https://python-poetry.org/)
 - [uv](https://pydevtools.com/handbook/reference/uv/)
 
+Below I will walk you step by step through the code and explain the details.
 
 ### Package installation and import
 
@@ -131,6 +132,8 @@ I assume you know how to set up python environments. If not, check out these lin
 In your preferred python environment setup install the packages from `requirements.txt`.
 
 `pip install -r requirements.txt`
+
+The `app.py` file is the main file where the application code is rendered. We start with package imports.
 
 ```python
 #app.py - package imports
@@ -148,18 +151,18 @@ if is_local():
     load_dotenv()
 ```
 
-The `os` package allows us to interact with the operating system. Here it will be used to retreive environment variables from an `.env` file.
+The `os` package allows us to interact with the operating system. Here it will be used to retrieve environment variables from an `.env` file.
 
 The `typing` package is due to inclusion of type hints. This is for code clarity and self-documentation. The type hints are seen in function/method documentation and give information about variable types.
 
-The `dotenv` package is for checking whether the code runs locally or remote, and then retrieve environment variables from an `.env` file, or if the code is deployed, retrieve environment variables from secrets stored in Azure Vault. To learn how this works, please see my upcoming post on deploying the AI agent applications with Azure Web Apps.
+The `dotenv` package is for checking whether the code runs locally or remote, and then retrieving environment variables from an `.env` file, or if the code is deployed, retrieving environment variables from secrets stored in Azure Vault, or in general other secret storage options. To learn how this works in Azure, please see my upcoming post on deploying the AI agent applications with Azure Web Apps.
 
 The `streamlit` package is the front-end application framework we will use in this prototype.
 
 The `azure` package is the Azure Python SDK.
 
 
-You also see an import of `streamlit_styles`. This is a custom styling file. Design and styling is not the scope of this article, but is indeed included to make the app appealing. You can view the content in the repo.
+You also see an import of `streamlit_styles`. This is a custom styling file. Design and styling is not the scope of this article, but is indeed included to make the app visually appealing. You can view the content in the repo.
 
 Last but not least, the `from utils import *` imports all functions present in the `utils.py` file. More on that below.
 
@@ -327,8 +330,8 @@ def send_user_message(client: AIProjectClient, agent_id: str, user_message: str)
     return st.session_state.get('thread_id'), st.session_state.get('run_id')
 ```
 
-The `send_message_user()` function implements the Azure Python SDK methods described in the [Azure documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/quickstarts/get-started-code?tabs=python) to connect to the given agent,
-create a new thread and run and returns the `thread_id` and `run_id` back to the main app function. 
+The `send_user_message()` function implements the Azure Python SDK methods described in the [Azure documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/quickstarts/get-started-code?tabs=python) to connect to the given agent,
+create a new thread and run, and returns the `thread_id` and `run_id` back to the main app function. 
 
 
 
@@ -357,7 +360,7 @@ def get_responses(client: AIProjectClient, thread_id: str, run_id: str) -> List[
     return responses
 ```
 
-The `get_responses()` function creates a list of messages in the current `run_id` and `thread_id`, appends message if there is one and returns the list of agent responses.
+The `get_responses()` function creates a list of messages in the current `run_id` and `thread_id`, appends the message if there is one, and returns the list of agent responses.
 
 
 ```python
@@ -394,15 +397,15 @@ The `safe_rerun()` function ensures a safe re-run of the application when the us
 <summary>🔡 Environment variables - click to expand code ⏬</summary>
 
 
-In order to connect to the correct Azure AI Foundry project and to the correct agent within the project, we need two evironment variables:
+In order to connect to the correct Azure AI Foundry project and to the correct agent within the project, we need two environment variables:
 
 * Azure AI Foundry project endpoint: in my code called `dingen_azure_endpoint`.
 * Azure AI Foundry Agent id: in my code called `dingen_agent_id`.
 
-The `dingen` is abbreviation for dinner generator.
+The `dingen` is an abbreviation for dinner generator.
 
 
-In the Azure AI Foundry portal you find the endpoint and id values here:
+In the Azure AI Foundry portal, you find the endpoint and id values here:
 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
@@ -419,7 +422,7 @@ In the Azure AI Foundry portal you find the endpoint and id values here:
 </div>
 
 
-Copy and paste them into your `.env` file in root directory, so the `is_local()` function finds the 
+Copy and paste them into your `.env` file in the root directory, so the `is_local()` function finds the 
 environment variables on app run.
 
 
@@ -451,12 +454,15 @@ What worked well:
 
 - Easy to get started
 - Decent code documentation for Python
-- A lot of available information and opprotunities for versatile agent capabilities
+- A lot of available information and opportunities for versatile agent capabilities
 - The code runs as intended. At this stage I did not experience bugs or glitches.
 
 Difficulties I ran into:
 
 - Nothing to mention at this stage.
+
+I hope you were able to run your own app locally and upskilled your agentic abilities with me.
+See you in the next one 🩵!  
 
 ---
 
