@@ -355,25 +355,50 @@ All best 🩵!
 **[🔝 Back to top 🔝](#top)**
 
 <style>
+.main-carousel {
+  margin: 20px 0;
+}
+
 .carousel-cell {
-  width: 70%;
-  margin-right: 10px;
+  width: 80%;
+  margin-right: 15px;
   text-align: center;
+  counter-increment: carousel-cell;
 }
 
 .carousel-cell img {
+  display: block;
   width: 100%;
+  max-width: 600px;
   height: auto;
+  min-height: 300px;
+  object-fit: contain;
   border-radius: 8px;
   cursor: zoom-in;
   transition: transform 0.2s ease;
+  margin: 0 auto;
 }
 
 .carousel-cell img:hover {
-  transform: scale(1.25);
+  transform: scale(1.05);
+}
+
+.carousel-cell p {
+  margin-top: 10px;
+  font-style: italic;
+  color: #666;
+}
+
+/* Fix for GitHub Pages theme conflicts */
+.main-carousel .flickity-viewport {
+  height: auto !important;
+  min-height: 350px;
+}
+
+.main-carousel .flickity-slider {
+  height: auto !important;
 }
 </style>
-
 
 
 
