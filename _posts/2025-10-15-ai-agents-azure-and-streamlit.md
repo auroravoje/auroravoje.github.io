@@ -468,8 +468,11 @@ See you in the next one 🩵!
 
 *Transparency note: This article is human-written with AI assistance for proofreading and typo correction. Main image generated with AI.*
 
+
 ---
 **[🔝 Back to top 🔝](#top)**
+
+{% include giscus.html %}
 
 
 <style>
