@@ -40,16 +40,20 @@ In this post I move forward and "build a house" for the AI agent, in terms of an
 
 * * *
 
-## Use Case Definition
-> Please help! What to cook for dinner for the upcoming week?
+# Use Case Definition
+
+A recap from previous post on the use case definition.
+
+> I will solve the following use case:
 >
-> The customer's need is a dinner planning agent that can help with the weekly challenges of composing a healthy, tasty meal plan while taking into consideration specific preferences, seasonality, and avoiding suggesting recent meals. Once the planning is done, the plan and a shopping list based on the plan should be sent to the user in a nicely rendered email.
+> The current family need is a dinner planning agent that can help with the weekly challenges of composing a healthy, tasty meal plan while taking into consideration specific preferences, seasonality, and avoiding suggesting recent meals. Once the planning is done, the plan and a shopping list based on the plan should be sent to the user in a nicely rendered email.
 
 The data is in a spreadsheet format where the customer can add entries. The recipe sheet has the following table:
 
 | Recipe       | Time, minutes | Link  | Season | Preference |
 |:-------------|:-------------|:------|:-------|:-----------|
 | Lasagna      | 120          | www   | all    | weekend    |
+| ⋮             |⋮             |⋮      |⋮      |⋮           |
 | Risotto      | 45           | www   | all    | weekend    |
 
 
@@ -58,7 +62,8 @@ The history sheet has the following table:
 |Year | Week         | Day    |Recipe |
 |:----|:-------------|:-------|:------|
 |2025 | 1            | 1      | Salmon with roasted vegetables  |
-|2025 | 1            | 2      | Sweet potato soup with fresh bread  |
+| ⋮    | ⋮            | ⋮       | ⋮                                 |
+|2025 | 40           | 7      | Sweet potato soup with fresh bread  |
 
 By the agentic definitions discussed in [my previous post]({% post_url 2025-10-15-ai-agents-azure %}), we then have the following setup:
 
@@ -81,7 +86,10 @@ By the agentic definitions discussed in [my previous post]({% post_url 2025-10-1
 
 This is, of course, a simple use case, but I hope you can easily contemplate analogies to real solutions and real business use case challenges. 
 
-## Development stages
+# Development stages
+
+As I would do in a real product development setting, I divide the development into 4 chronological stages and hence also into 4 articles of this series:
+
 - No Code: Create agent in AI Foundry Portal and test it in playground ([previous post]({% post_url 2025-10-15-ai-agents-azure %}))
 - **AI Foundry Portal and Code: Build a home for the agent in a Streamlit app (this post)**
 - Only Code: Build an agent system in Python with Azure SDK and Streamlit app ([upcoming post]({% post_url 2025-10-27-ai-agents-azure-python-sdk %}))
@@ -126,9 +134,6 @@ Below I will walk you step by step through the code and explain the details.
 
 ### Package installation and import
 
-<details markdown=1>
-<summary>📦 Package imports and setup - click to expand code ⏬ </summary>
-
 In your preferred python environment setup install the packages from `requirements.txt`.
 
 `pip install -r requirements.txt`
@@ -166,14 +171,9 @@ You also see an import of `streamlit_styles`. This is a custom styling file. Des
 
 Last but not least, the `from utils import *` imports all functions present in the `utils.py` file. More on that below.
 
-</details>
-
 * * *
 
 ### Main app code
-
-<details markdown=1>
-<summary>📱 App code - click to expand code ⏬</summary>
 
 ```python
 # app.py
@@ -245,6 +245,7 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 ```
+
 A step by step explanation to app process flow:
 
 - Set title and browser tab favicon emoji.
@@ -268,14 +269,9 @@ A step by step explanation to app process flow:
     - Add streamlit widget `st.chat_input()`, a user input panel for chatting.
     - The comments in the if statements and for loops should be self explanatory.
 
-</details>
-
-
 * * *
 
 ### Utility functions
-<details markdown=1>
-<summary>🔧 Utility functions - click to expand code ⏬</summary>
 
 ```python
 #utils.py 
@@ -387,15 +383,9 @@ def safe_rerun() -> None:
 The `safe_rerun()` function ensures a safe re-run of the application when the user clicks the 
 `Reset conversation` button in the left sidebar panel.
 
-</details>
-
 * * *
 
 ### Environment variables
-
-<details markdown=1>
-<summary>🔡 Environment variables - click to expand code ⏬</summary>
-
 
 In order to connect to the correct Azure AI Foundry project and to the correct agent within the project, we need two environment variables:
 
@@ -431,8 +421,6 @@ environment variables on app run.
 dingen_azure_endpoint = paste value here
 dingen_agent_id = paste value here
 ```
-
-</details>
 
 * * *
 
