@@ -283,7 +283,6 @@ Our agent is ready to be tested in the portal playground.
 `My assets -> Data + indexes -> Vector stores`
 . If you later create an agent by code which exists only during an app session state and has knowledge added to it, you will find the associated vector store here as well.
 
-</details>
 
 ### Test the AI agent in AI Foundry Playground
 In your AI Foundry project's left sidebar, go to **Playgrounds -> Agents playground.**
