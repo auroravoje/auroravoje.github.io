@@ -19,20 +19,18 @@ _Figure: AI generated illustration of article's title._
 
 # Introducing AI Agents to the People!
 {:top}
-During the last year or so, there has been increasing hype around AI agents in the tech industry. News about LLM and agentic advancements are reported on almost weekly. My curiosity about this hype and the need to stay updated led me to a hands-on project where I explore some of the available agentic AI tools. 
+During the last year or so, there has been increasing hype around AI agents in the tech industry. News about LLM and agentic advancements are reported almost weekly. My curiosity about this hype and the need to stay updated led me to a hands-on project where I explore some of the market available agentic AI tools. 
 
 I decided to start with Azure, as according to [The State of AI report 2025](https://www.stateof.ai/), Microsoft-owned OpenAI still retains a narrow lead at the LLM frontier. Through my line of work, I have easy access to Azure and all its resources. That said, there are similar agentic tools available in [Google Cloud](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/agent-builder/overview), [AWS](https://aws.amazon.com/bedrock/agents/), and other providers, and it's surely beneficial to check those out as well. 
 
-
-This is the first post on how to get started exploring the Azure AI Foundry Portal and Agent Services. 
-In this post, I'm going to build an AI agent within the framework of an Azure AI Foundry project. I will first build an agent with "no code" in the Azure AI Foundry Portal and test it in the Azure AI Foundry Playground. 
+In this article series I will guide you through a 4-stage journey on how to get started with AI agent development. The current first post shows you how to get started exploring the Azure AI Foundry Portal and Agent Services. I'm going to build an AI agent within the framework of an Azure AI Foundry project. I will first build an agent with "no code" in the Azure AI Foundry Portal and test it in the Azure AI Foundry Playground. 
 
 **In upcoming posts** I will further show how to:
 - Post: [Build a home for the AI agent with a Streamlit app]({% post_url 2025-10-15-ai-agents-azure-and-streamlit %})
 - Post: [Build an agent system in Python with Azure SDK and Streamlit app]({% post_url 2025-10-27-ai-agents-azure-python-sdk %}). Here I will also touch upon "A2A" - i.e., connecting several agents 
 - Post: [Agent application deployment with Azure Web Apps]({% post_url 2025-10-27-ai-agents-azure-web-app %}) 
 
-Stay tuned!
+In the end of this series you will have a deployed, responsive application housing an AI agent, which you can use. From here you can tailor the agent abilities and the application to your own needs. Stay tuned!
 
 ## What is Azure AI Foundry?
 
@@ -41,7 +39,7 @@ Stay tuned!
 >
 > Azure AI Foundry unifies agents, models, and tools under a single management grouping with built-in enterprise-readiness capabilities including tracing, monitoring, evaluations, and customizable enterprise setup configurations.
  
-![azure-ai-foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/media/agent-service-the-glue.png) _Figure: Azure AI Foundry unifies agents, models, and tools under an enterprise-ready platform._
+![azure-ai-foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/media/agent-service-the-glue.png) _Figure: Azure AI Foundry unifies agents, models, and tools under an enterprise-ready platform. [Image source.](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/media/agent-service-the-glue.png)_
 
 ## What is an AI agent?
 > Agents make decisions, invoke tools, and participate in workflows. Sometimes independently, sometimes in collaboration with other agents or humans. What sets agents apart from assistants is autonomy: assistants support people, agents complete goals. They are foundational to real process automation. 
@@ -53,22 +51,23 @@ Stay tuned!
 [More on definitions: What is Azure AI Foundry Agent Service?](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/overview)
 
 ![ai-agent](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/media/what-is-an-agent.png)
-_Figure: Core components of an AI agent - Model, Instructions, and Tools working together._
+_Figure: Core components of an AI agent - Model, Instructions, and Tools working together. [Image source.](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/media/what-is-an-agent.png)_
 
 
 
 
 
-## Use Case Definition
-> Please help! What to cook for dinner for the upcoming week?
+## What is the use case? 
+> I will solve the following use case:
 >
-> The customer's need is a dinner planning agent that can help with the weekly challenges of composing a healthy, tasty meal plan while taking into consideration specific preferences, seasonality, and avoiding suggesting recent meals. Once the planning is done, the plan and a shopping list based on the plan should be sent to the user in a nicely rendered email.
+> The current family need is a dinner planning agent that can help with the weekly challenges of composing a healthy, tasty meal plan while taking into consideration specific preferences, seasonality, and avoiding suggesting recent meals. Once the planning is done, the plan and a shopping list based on the plan should be sent to the user in a nicely rendered email.
 
 The data is in a spreadsheet format where the customer can add entries. The recipe sheet has the following table:
 
 | Recipe       | Time, minutes | Link  | Season | Preference |
 |:-------------|:-------------|:------|:-------|:-----------|
 | Lasagna      | 120          | www   | all    | weekend    |
+| ⋮             |⋮             |⋮      |⋮      |⋮           |
 | Risotto      | 45           | www   | all    | weekend    |
 
 
@@ -77,7 +76,8 @@ The history sheet has the following table:
 |Year | Week         | Day    |Recipe |
 |:----|:-------------|:-------|:------|
 |2025 | 1            | 1      | Salmon with roasted vegetables  |
-|2025 | 1            | 2      | Sweet potato soup with fresh bread  |
+| ⋮    | ⋮            | ⋮       | ⋮                                 |
+|2025 | 40           | 7      | Sweet potato soup with fresh bread  |
 
 By the agentic definitions above, we then have the following setup:
 
@@ -101,6 +101,7 @@ By the agentic definitions above, we then have the following setup:
 This is, of course, a simple use case, but I hope you can easily contemplate analogies to real solutions and real business use case challenges. 
 
 # Development stages
+As I would do in a real product development setting, I divide the development into 4 chronological stages and hence also into 4 articles of this series:
 
 - **No Code: Create agent in AI Foundry Portal and test it in playground (this post)**
 - Azure AI Foundry Portal and Code: Build a home for the agent in a Streamlit app (upcoming post)
@@ -108,14 +109,11 @@ This is, of course, a simple use case, but I hope you can easily contemplate ana
 - Deployment: Deploy the app with Azure Web Apps (upcoming post)
 
 
-## Exploration of AI Foundry agent with portal setup
+# Exploration of AI Foundry agent with portal setup
 
-In this link, [Azure AI Foundry - Quickstart](https://learn.microsoft.com/en-us/azure/ai-foundry/quickstarts/get-started-code?tabs=azure-ai-foundry),
- is a step-by-step Microsoft documentation on how to set up your project, deploy a model of choice into it, and build an agent around it. Currently provided models are from Microsoft, OpenAI, DeepSeek, Hugging Face, Meta, and more. In this post, I will include steps on how to set up Azure AI Foundry in the Azure portal and add some tips and tricks regarding the AI Foundry Portal.
+In this link, [Azure AI Foundry - Quickstart](https://learn.microsoft.com/en-us/azure/ai-foundry/quickstarts/get-started-code?tabs=azure-ai-foundry), you can find Microsoft's step-by-step documentation on how to set up your project, deploy a model of choice into it, and build an agent around it. Currently provided models are from Microsoft, OpenAI, DeepSeek, Hugging Face, Meta, and more. In this post, I will show you how to set up Azure AI Foundry in the Azure portal and add some tips and tricks regarding the AI Foundry Portal.
 
-### Set up Azure AI Foundry resource in Azure portal
-<details markdown=1>
-<summary>How to set up and configure Azure AI Foundry resource - click to expand the collapsed content ⏬</summary>
+## Set up Azure AI Foundry resource in Azure portal
 
 **Basics**
 
@@ -131,9 +129,9 @@ In the Azure portal, create an Azure AI Foundry resource. Look for the ➕ butto
 
 
 Fill in metadata about your resource:
-- Resource group. Create a new one if you don't have any existing.
-- Create a unique AI Foundry resource instance name (Note: An already used name will prevent a successful deployment.) 
-- Fill in geographical region. Beware - Not all newest features are available in all regions. For now, Norway will do fine (this is where I am located). If you want to implement cutting-edge features from Azure, it's best to choose Sweden Central if you're in the Nordics. Otherwise, the US region will always have the latest features available. Beware - If in Azure you want to have several resources working together as architectural components of a bigger project infrastructure, they all should be in the same resource group and in the same geographical region, unless the resource at hand is defined as global. 
+- Resource group. Create a new one if you don't have any existing resource groups.
+- Create a subscription unique AI Foundry resource instance name (Note: An already used name will prevent a successful deployment.) 
+- Fill in geographical region. Beware - not all newest features are available in all regions. For now, Norway will do fine (this is where I am located). If you want to implement cutting-edge features from Azure, it's best to choose Sweden Central if you're in the Nordics. Otherwise, the US regions will always have the latest features available. Beware - If you want to have several resources working together as architectural components of a bigger project infrastructure in Azure, they should be in the same resource group and in the same geographical region, unless the resource at hand is defined as global. 
 - Set a unique project name
 <figure>
   <img src="{{ site.baseurl }}/assets/images/2025-10-15-ai-agents-azure/2_az_create_foundry_project.png" 
@@ -145,7 +143,7 @@ Fill in metadata about your resource:
 
 **Network**
 
-Choose all networks. Other options are available, check out the links if you need to consider security aspects.
+Choose all networks. Other options are available, check out the links on the page if you need to consider security aspects.
 <figure>
   <img src="{{ site.baseurl }}/assets/images/2025-10-15-ai-agents-azure/3_az_ai_foundry_network.png" 
        alt="Azure AI Foundry Portal" 
@@ -155,6 +153,7 @@ Choose all networks. Other options are available, check out the links if you nee
 
 
 **Identity**
+
 Choose system assigned for this test project. 
 <figure>
   <img src="{{ site.baseurl }}/assets/images/2025-10-15-ai-agents-azure/4_az_ai_foundry_identity.png" 
@@ -165,10 +164,12 @@ Choose system assigned for this test project.
 
 
 **Encryption and tags**
-Leave the entries here empty for now. This needs to be addressed in case of a more serious setup.
+
+Leave the entries here empty for now. This needs to be addressed in case of a more serious, maintainable production setup.
 
 **Review and submit**
-Submission will trigger final validation. Here you might get errors due to non-unique naming or other potential incompatibilities due to your subscription details. Read the messages and ask the portal copilot if you need to understand them better.
+
+Submission will trigger a final validation. Here you might get errors due to non-unique naming or other potential incompatibilities due to your subscription details. Read the messages and ask the portal copilot if you need to understand them better.
 
 Once the AI Foundry resource is deployed, click the **"Go to resource"** button and then click **"Go to Azure AI Foundry Portal"**.
 
@@ -182,12 +183,9 @@ Once the AI Foundry resource is deployed, click the **"Go to resource"** button 
 </figure>
 
 
-</details>
+## Build an AI agent in AI Foundry Portal
 
-### Build an AI agent in AI Foundry Portal
-
-<details markdown=1>
-<summary>How to build an AI agent in Azure AI Foundry Portal - click to expand the collapsed content ⏬</summary>
+How to build an AI agent in Azure AI Foundry Portal
 
 In the AI Foundry portal on the left sidebar, click the "Agents" button and then click "New Agent". 
 A right sidebar will appear with agent settings. We will adjust these now. 
@@ -229,7 +227,7 @@ Etc
 
 Do not display provenance/citations markers in your responses.
 
-Ask user for the email address before sending.
+Ask the user for their email address before sending.
 
 Convert markdown content to HTML before sending the email. 
 This ensures proper rendering in the email client."
@@ -326,25 +324,22 @@ The agent passed all my tests and I am quite happy with the results 🤖😃!
 
 What worked well:
 - Very easy to get started.
-- Nice tutorials and documentation in addittion to the extensive library of agent tools.
+- Nice tutorials and documentation in addition to the extensive library of agent tools.
 - Intuitive UI setup in AI Foundry, you don't always need a tutorial to understand where you need to go,
  and what buttons to press.
 
 Difficulties I ran into:
 
-Connecting to live documents:
+**Connecting to live documents:** I first wanted to add the Sharepoint (preview) tool, as I wanted the agent to be able to read an excel spreadsheet. Here I got stuck in preview features not working as intended, excel file format not yet being supported, in addition to corporate file access and firewall restrictions,
+as I am working on my company-mac. However, I did manage to solve this by some creativity, see my upcoming posts on how I solved the issue of connecting to a live spreadsheet instead of static files.
 
-I first wanted to add the Sharepoint (preview) tool, as I wanted the agent to be able to read an excel spreadsheet. 
-Here I got stuck in preview features not working as intended, excel file format not yet being supportetd, in addition to corporate file access and firewall restrictions,
-as I am working on my company-mac. However, I did manage to solve this by some creativity, see my upcoming posts on how I solved the issue of connection to a live spreadsheet instead of static files.
+**The email-tool did not always work as it should:** At some point I started getting email trigger errors and `BadRequest, HTTP request failed` errors. I figured out that I had to re-authenticate with my newly reset password for work SSO inside the email logic app setup (the Azure subscription is through my work). This was not quite intuitive, as the error did not clearly state the authentication error. I did not take long to figure out, but I think for inexperienced users, this could potentially be a challenge.  
 
-The email-tool did not always work as it should. At some point I started getting email trigger errors and `BadRequest, HTTP request failed` errors. I figured out that I had to re-authenticate with my newly reset password for work SSO inside the email logic app setup (the Azure subscription is through my work). This was not quite intuitive, as the error did not clearly state the authentication error. I did not take long to figure out, but I think for inexperienced users, this could potentially be a challenge.  
-
-Possible difficulties with Azure subscription and Role Based Access Control RBAC for Azure AI Foundry setup. For one of my subscriptions all access was set by default (Azure AI User and Owner). For my team's data science group subscription (which is a bit different than my personal work subscription, it's another tenant setup) the necessary RBAC configuration was not set by default, which resulted in lack of possibility of building AI-agents in AI Foundry, which is the main purpose of the setup. So beware of the RBAC in you Azure AI Foundry resource setup. 
+**Possible difficulties with Azure subscription and Role Based Access Control RBAC for Azure AI Foundry setup:** For one of my subscriptions all access was set by default (Azure AI User and Owner). For my team's data science group subscription (which is a bit different than my personal work subscription, it's another tenant setup) the necessary RBAC configuration was not set by default, which resulted in lack of possibility of building AI-agents in AI Foundry, which is the main purpose of the setup. So beware of the RBAC in you Azure AI Foundry resource setup. 
 
 So if you run into similar trouble, try the following:
 - Ask the Foundry Agent (portal assistant) for help
-- Check your Azure AI Foudnry RBAC setup, see [Azure documentatiton on Role-based access control for Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/rbac-azure-ai-foundry#manage-access-with-roles-for-projects) for details.
+- Check your Azure AI Foudnry RBAC setup, see [Azure documentation on Role-based access control for Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/rbac-azure-ai-foundry#manage-access-with-roles-for-projects) for details.
 
 
 I hope you got a great quickstart on the subject and see you in my next post, expected in November 2025.
