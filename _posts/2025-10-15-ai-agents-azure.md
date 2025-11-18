@@ -98,7 +98,7 @@ By the agentic definitions above, we then have the following setup:
   - Weekly dinner plan and shopping list in HTML format. 
   - Plan and shopping list sent to user by email. 
 
-This is, of course, a simple use case, but I hope you can easily contemplate analogies to real solutions and real business use case challenges. 
+This is, of course, a simple use case, but I hope you can contemplate analogies to real solutions and real business use case challenges. 
 
 # Development stages
 As I would do in a real product development setting, I divide the development into 4 chronological stages and hence also into 4 articles of this series:
@@ -320,8 +320,9 @@ The agent passed all my tests and I am quite happy with the results 🤖😃!
 
 
 # First impression of Azure AI Foundry's state of maturity and further thoughts
-
+Here I will share my first impression of the Azure AI Foundry platform and agent services after having tested it as described above.
 What worked well:
+
 - Very easy to get started.
 - Nice tutorials and documentation in addition to the extensive library of agent tools.
 - Intuitive UI setup in AI Foundry, you don't always need a tutorial to understand where you need to go,
