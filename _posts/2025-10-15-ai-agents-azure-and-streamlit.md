@@ -152,8 +152,6 @@ from streamlit_styles import apply_style_background, apply_style_blur
 
 The `os` package allows us to interact with the operating system. Here it will be used to retrieve environment variables from an `.env` file.
 
-The `typing` package is due to inclusion of type hints. This is for code clarity and self-documentation. The type hints are seen in function/method documentation and give information about variable types.
-
 The `dotenv` package is for checking whether the code runs locally or remote, and then retrieving environment variables from an `.env` file, or if the code is deployed, retrieving environment variables from secrets stored in Azure Vault, or in general other secret storage options. To learn how this works in Azure, please see my upcoming post on deploying the AI agent applications with Azure Web Apps.
 
 The `streamlit` package is the front-end application framework we will use in this prototype.
