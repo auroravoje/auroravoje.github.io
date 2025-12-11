@@ -14,4 +14,4 @@ author: Aurora Voje, PhD
 
 **Wait for it!** 
 
-🚧 This post is under construction. Expected release at the end of November 2025. 🚧
+🚧 This post is under construction. Expected release in December 2025. 🚧
