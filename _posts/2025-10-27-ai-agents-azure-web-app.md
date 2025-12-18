@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  "AI-agents deployed with Azure Web Apps"
+title:  "Agent application deployment with Azure Web Apps"
 date:   2025-10-27 09:00:00 +0200
 categories: AI agents Azure Python Web Apps
 author: Aurora Voje, PhD
