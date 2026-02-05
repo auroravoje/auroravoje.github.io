@@ -4,7 +4,7 @@
 }
 
 .carousel-cell {
-  width: 80%;
+  width: 100%;
   margin-right: 15px;
   text-align: center;
   counter-increment: carousel-cell;
@@ -13,9 +13,8 @@
 .carousel-cell img {
   display: block;
   width: 100%;
-  max-width: 600px;
+  max-width: 1200px;
   height: auto;
-  min-height: 300px;
   object-fit: contain;
   border-radius: 8px;
   cursor: zoom-in;
@@ -38,7 +37,7 @@
 /* Fix for GitHub Pages theme conflicts */
 .main-carousel .flickity-viewport {
   height: auto !important;
-  min-height: 350px; /* Reduced from 500px */
+  min-height: 800px;
   padding-bottom: 0; /* Changed from 10px */
 }
 

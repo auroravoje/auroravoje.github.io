@@ -888,7 +888,7 @@ az webapp auth update \
     --action LoginWithMicrosoft
 ```
 
-**The below might beß handy - accessing user information in code**
+**The below might be handy - accessing user information in code**
 
 Once authentication is enabled, you can access user information in your Streamlit app like this.
 
