@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>How to build a home for an AI agent | Luminous Algorithms - Aurora’s AI Atelier</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="How to build a home for an AI agent" />
+<meta name="author" content="Aurora Voje, PhD" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Figure: AI generated illustration of article’s title." />
+<meta property="og:description" content="Figure: AI generated illustration of article’s title." />
+<link rel="canonical" href="http://localhost:4000/ai/agents/azure/streamlit/2025/10/15/ai-agents-azure-and-streamlit.html" />
+<meta property="og:url" content="http://localhost:4000/ai/agents/azure/streamlit/2025/10/15/ai-agents-azure-and-streamlit.html" />
+<meta property="og:site_name" content="Luminous Algorithms - Aurora’s AI Atelier" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-15T14:29:17+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="How to build a home for an AI agent" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Aurora Voje, PhD"},"dateModified":"2025-10-15T14:29:17+02:00","datePublished":"2025-10-15T14:29:17+02:00","description":"Figure: AI generated illustration of article’s title.","headline":"How to build a home for an AI agent","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/ai/agents/azure/streamlit/2025/10/15/ai-agents-azure-and-streamlit.html"},"url":"http://localhost:4000/ai/agents/azure/streamlit/2025/10/15/ai-agents-azure-and-streamlit.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=4e4b19c53ccbcd1a6abb63498e2b54bea0da3ae5">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">How to build a home for an AI agent</h1>
+      <h2 class="project-tagline">Brightening the data science landscape, one insight at a time.</h2>
+      
+        <a href="https://github.com/auroravoje/auroravoje.github.io" class="btn">View on GitHub</a>
+      
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <p><img src="/assets/images/2025-10-15-ai-agents-and-streamlit/intro_build_home_agent.png" alt="Build home for AI agent" />
+<em>Figure: AI generated illustration of article’s title.</em></p>
+
+<hr />
+<p><strong><a href="http://localhost:4000">Luminous Algorithms - Aurora’s AI Atelier</a></strong> | By Aurora Voje, PhD | October 15, 2025</p>
+
+<hr />
+
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#use-case-definition" id="markdown-toc-use-case-definition">Use Case Definition</a></li>
+  <li><a href="#development-stages" id="markdown-toc-development-stages">Development stages</a></li>
+  <li><a href="#housing-the-ai-agent-in-a-streamlit-app" id="markdown-toc-housing-the-ai-agent-in-a-streamlit-app">Housing the AI agent in a Streamlit app</a>    <ul>
+      <li><a href="#combining-streamlit-and-azure-python-sdk-chat-functionality" id="markdown-toc-combining-streamlit-and-azure-python-sdk-chat-functionality">Combining Streamlit and Azure Python SDK chat functionality</a></li>
+      <li><a href="#application-code" id="markdown-toc-application-code">Application Code</a>        <ul>
+          <li><a href="#package-installation-and-import" id="markdown-toc-package-installation-and-import">Package installation and import</a></li>
+          <li><a href="#main-app-code" id="markdown-toc-main-app-code">Main app code</a></li>
+          <li><a href="#utility-functions" id="markdown-toc-utility-functions">Utility functions</a></li>
+          <li><a href="#environment-variables" id="markdown-toc-environment-variables">Environment variables</a></li>
+          <li><a href="#final-result" id="markdown-toc-final-result">Final result</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#first-impression-of-azure-python-sdk-state-of-maturity-and-further-steps" id="markdown-toc-first-impression-of-azure-python-sdk-state-of-maturity-and-further-steps">First impression of Azure Python SDK state of maturity and further steps</a></li>
+</ul>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>The tech community is hyping about AI agents at the moment. All the biggest tech giants offer tools on the subject. In order to make up my own opinion on the topic, I decided to not just talk the talk, but also walk the walk and conduct hands-on agentic AI development.</p>
+
+<p><a href="/ai/agents/azure/2025/10/15/ai-agents-azure.html">In my previous post</a> I answered key questions like</p>
+<ul>
+  <li>What is an AI agent?</li>
+  <li>What is Azure AI Foundry?</li>
+  <li>How to build an AI agent in the Azure AI Foundry portal?</li>
+</ul>
+
+<p>If you’re new to the subject, check out the post to read up on this background information. I also introduced arguments for why I started with Microsoft, and need to stress again that similar agentic frameworks are provided by <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/agent-builder/overview">Google Cloud</a>, <a href="https://aws.amazon.com/bedrock/agents/">AWS</a>, and other providers, and it’s surely beneficial to check those out as well. Hence, this article is not an advertisement for any specific provider. This is just what was easily available to me, and I plan on looking into more providers myself. Possibly a comparison post will appear in the future.</p>
+
+<p>In this post I move forward and “build a house” for the AI agent, in terms of an app interface, separate from the Azure AI Foundry Playground. There are so many wonderful front-end frameworks to choose from. As this is a AI/data science post for Python, Streamlit is an excellent application framework to start with, in order to quickly get up and running with a prototype app.</p>
+
+<p><strong>In upcoming posts</strong> I will further show how to:</p>
+<ul>
+  <li>Post: <a href="/ai/agents/azure/python/2025/10/27/ai-agents-azure-python-sdk.html">Build an agent system in Python with Azure SDK and Streamlit app</a>. Here I will build an AI agent with code and also touch upon “A2A” - that is, connecting several agents.</li>
+  <li>Post: <a href="/ai/agents/azure/python/web/apps/2025/10/27/ai-agents-azure-web-app.html">Agent application deployment with Azure Web Apps</a> is a tutorial on how to deploy the app I’m building so other users can reach it.</li>
+</ul>
+
+<hr />
+
+<h1 id="use-case-definition">Use Case Definition</h1>
+
+<p>A recap from previous post on the use case definition.</p>
+
+<blockquote>
+  <p>I will solve the following use case:</p>
+
+  <p>The current family need is a dinner planning agent that can help with the weekly challenges of composing a healthy, tasty meal plan while taking into consideration specific preferences, seasonality, and avoiding suggesting recent meals. Once the planning is done, the plan and a shopping list based on the plan should be sent to the user in a nicely rendered email.</p>
+</blockquote>
+
+<p>The data is in a spreadsheet format where the customer can add entries. The recipe sheet has the following table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Recipe</th>
+      <th style="text-align: left">Time, minutes</th>
+      <th style="text-align: left">Link</th>
+      <th style="text-align: left">Season</th>
+      <th style="text-align: left">Preference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Lasagna</td>
+      <td style="text-align: left">120</td>
+      <td style="text-align: left">www</td>
+      <td style="text-align: left">all</td>
+      <td style="text-align: left">weekend</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">⋮</td>
+      <td style="text-align: left">⋮</td>
+      <td style="text-align: left">⋮</td>
+      <td style="text-align: left">⋮</td>
+      <td style="text-align: left">⋮</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Risotto</td>
+      <td style="text-align: left">45</td>
+      <td style="text-align: left">www</td>
+      <td style="text-align: left">all</td>
+      <td style="text-align: left">weekend</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The history sheet has the following table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Year</th>
+      <th style="text-align: left">Week</th>
+      <th style="text-align: left">Day</th>
+      <th style="text-align: left">Recipe</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">2025</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">Salmon with roasted vegetables</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">⋮</td>
+      <td style="text-align: left">⋮</td>
+      <td style="text-align: left">⋮</td>
+      <td style="text-align: left">⋮</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2025</td>
+      <td style="text-align: left">40</td>
+      <td style="text-align: left">7</td>
+      <td style="text-align: left">Sweet potato soup with fresh bread</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>By the agentic definitions discussed in <a href="/ai/agents/azure/2025/10/15/ai-agents-azure.html">my previous post</a>, we then have the following setup:</p>
+
+<ul>
+  <li><strong>Input:</strong>
+    <ul>
+      <li>Data of recipes and recently consumed user meals.</li>
+      <li>User messages.</li>
+      <li>Agent messages.</li>
+      <li>System events like app session and state.</li>
+    </ul>
+  </li>
+  <li><strong>Agent:</strong>
+    <ul>
+      <li>LLM suitable for planning.</li>
+      <li>Instructions like personal meal preferences, seasonal and weekly preferences, latest dinner history to avoid suggesting recently consumed meals.</li>
+    </ul>
+  </li>
+  <li><strong>Tools and actions:</strong>
+    <ul>
+      <li>Knowledge retrieval of favorite recipes and recent actual dinners and other preferences.</li>
+      <li>Email tool with action of sending the user the dinner plan and shopping list.</li>
+      <li>Memory preservation within the current app session state.</li>
+    </ul>
+  </li>
+  <li><strong>Output:</strong>
+    <ul>
+      <li>Agent messages.</li>
+      <li>Weekly dinner plan and shopping list in HTML format.</li>
+      <li>Plan and shopping list sent to user by email.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>This is, of course, a simple use case, but I hope you can contemplate analogies to real solutions and real business use case challenges.</p>
+
+<h1 id="development-stages">Development stages</h1>
+
+<p>A recap from previous post on the development stages. As I would do in a real product development setting, I divide the development into 4 chronological stages and hence also into 4 articles of this series:</p>
+
+<ul>
+  <li>No Code: Create agent in AI Foundry Portal and test it in playground (<a href="/ai/agents/azure/2025/10/15/ai-agents-azure.html">previous post</a>)</li>
+  <li><strong>AI Foundry Portal and Code: Build a home for the agent in a Streamlit app (this post)</strong></li>
+  <li>Only Code: Build an agent system in Python with Azure SDK and Streamlit app (<a href="/ai/agents/azure/python/2025/10/27/ai-agents-azure-python-sdk.html">upcoming post</a>)</li>
+  <li>Deployment: Agent application deployment with Azure Web Apps (<a href="/ai/agents/azure/python/web/apps/2025/10/27/ai-agents-azure-web-app.html">upcoming post</a>)</li>
+</ul>
+
+<hr />
+
+<h1 id="housing-the-ai-agent-in-a-streamlit-app">Housing the AI agent in a Streamlit app</h1>
+
+<p>In the previous post, we created the dinner planning agent in Azure AI Foundry Portal. Now that the agent is tested and working well in the portal playground, I will build an application environment in order to interact with the agent. In a real setting, a customer would not be able to log into the developer’s Azure AI Foundry portal. The scope of the current post is a setup with Streamlit on <code class="language-plaintext highlighter-rouge">localhost</code>.</p>
+
+<h2 id="combining-streamlit-and-azure-python-sdk-chat-functionality">Combining Streamlit and Azure Python SDK chat functionality</h2>
+
+<p>If you have never tried Streamlit apps before, I highly recommend going through their introductory and chat-app tutorials as a prerequisite for the upcoming code:</p>
+
+<ul>
+  <li><a href="https://docs.streamlit.io/get-started/tutorials/create-an-app">Create a Streamlit app</a></li>
+  <li><a href="https://docs.streamlit.io/develop/tutorials/chat-and-llm-apps/build-conversational-apps">Build a basic LLM chat app with Streamlit</a></li>
+</ul>
+
+<p>I also recommend having a look at the Azure AI Foundry documentation on how to interact
+with an AI agent in Python. Read through the sections below when the Python tab is chosen:</p>
+
+<ul>
+  <li><a href="https://learn.microsoft.com/en-us/azure/ai-foundry/quickstarts/get-started-code?tabs=python">Quickstart: Get started with Azure AI Foundry (Foundry projects)</a> with focus on
+    <ul>
+      <li>Set up your environment</li>
+      <li>Run a chat completion</li>
+      <li>Chat with an agent</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>NB!</strong> The Azure Python SDK code documentation shows how to create an AI agent on the fly. In this post I will show you how to connect to an already existing agent. In the next post I will implement agent creation on app session start, and agent deletion on app session end (or user defined deletion).</p>
+
+<h2 id="application-code">Application Code</h2>
+
+<p>You can find the entire codebase on Github. Follow this <a href="https://github.com/auroravoje/ai-agent/tree/sme-version">link to my Github repo with specific branch</a> to see the code version discussed in this article. You will need to clone the repo in order to make the code run. You will also need to add a <code class="language-plaintext highlighter-rouge">.env</code> file to your local setup. For details check out the <a href="#environment-variables">Environment variables</a> section.</p>
+
+<p>I assume you know how to set up Python environments. If not, check out these links. The choice depends on your purpose and preferences.</p>
+
+<ul>
+  <li><a href="https://pydevtools.com/handbook/reference/uv/">uv</a></li>
+  <li><a href="https://python-poetry.org/">Poetry</a></li>
+  <li><a href="https://realpython.com/intro-to-pyenv/">Managing Multiple Python Versions With pyenv</a></li>
+  <li><a href="https://docs.python.org/3/library/venv.html">Creation of virtual environments with venv</a></li>
+</ul>
+
+<p>Below I will walk you step by step through the code and explain the details.</p>
+
+<h3 id="package-installation-and-import">Package installation and import</h3>
+
+<p>In your preferred python environment setup install the packages from <code class="language-plaintext highlighter-rouge">requirements.txt</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">pip install -r requirements.txt</code></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">app.py</code> file is the main file where the application code is rendered. We start with package imports.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="c1">#app.py - package imports
+</span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="n">st</span>
+<span class="kn">from</span> <span class="nn">azure.ai.projects</span> <span class="kn">import</span> <span class="n">AIProjectClient</span>
+<span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">DefaultAzureCredential</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="kn">import</span> <span class="nn">utils</span>
+<span class="kn">from</span> <span class="nn">streamlit_styles</span> <span class="kn">import</span> <span class="n">apply_style_background</span><span class="p">,</span> <span class="n">apply_style_blur</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The <code class="language-plaintext highlighter-rouge">os</code> package allows us to interact with the operating system. Here it will be used to retrieve environment variables from an <code class="language-plaintext highlighter-rouge">.env</code> file.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">dotenv</code> package is for checking whether the code runs locally or remote, and then retrieving environment variables from an <code class="language-plaintext highlighter-rouge">.env</code> file, or if the code is deployed, retrieving environment variables from secrets stored in Azure Vault, or in general other secret storage options. To learn how this works in Azure, please see my upcoming post on deploying the AI agent applications with Azure Web Apps.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">streamlit</code> package is the front-end application framework we will use in this prototype.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">azure</code> package is the Azure Python SDK.</p>
+
+<p>You also see an import of <code class="language-plaintext highlighter-rouge">streamlit_styles</code>. This is a custom styling file. Design and styling is not the scope of this article, but is indeed included to make the app visually appealing. You can view the content in the repo.</p>
+
+<p>Last but not least, the <code class="language-plaintext highlighter-rouge">import utils</code> imports the <code class="language-plaintext highlighter-rouge">utils</code> module. More on that below.</p>
+
+<hr />
+
+<h3 id="main-app-code">Main app code</h3>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+</pre></td><td class="code"><pre><span class="c1"># app.py ...
+</span><span class="k">if</span> <span class="n">utils</span><span class="p">.</span><span class="n">is_local</span><span class="p">():</span>
+    <span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">st</span><span class="p">.</span><span class="n">set_page_config</span><span class="p">(</span><span class="n">page_title</span><span class="o">=</span><span class="s">"Dinner Generator"</span><span class="p">,</span> <span class="n">page_icon</span><span class="o">=</span><span class="s">"🍲"</span><span class="p">)</span>
+
+    <span class="n">apply_style_background</span><span class="p">()</span>
+    <span class="n">apply_style_blur</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">st</span><span class="p">.</span><span class="n">sidebar</span><span class="p">:</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"## Controls"</span><span class="p">)</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"Manage your session."</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">st</span><span class="p">.</span><span class="n">button</span><span class="p">(</span><span class="s">"Reset conversation"</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s">"reset"</span><span class="p">):</span>
+            <span class="c1"># remove only conversation-related keys (keep session alive)
+</span>            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s">"thread_id"</span><span class="p">,</span> <span class="s">"run_id"</span><span class="p">,</span> <span class="s">"chat_history"</span><span class="p">):</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="c1"># Ensure chat_history exists so the UI renders immediately
+</span>            <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">"chat_history"</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="c1"># Prefer immediate rerun if available in Streamlit; otherwise continue the run so UI renders
+</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="s">"experimental_rerun"</span><span class="p">):</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">experimental_rerun</span><span class="p">()</span>
+
+    <span class="n">st</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"AI Dinner Planning Agent"</span><span class="p">)</span>
+
+    <span class="n">agent_id</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">"dingen_agent_id"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">agent_id</span><span class="p">:</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s">"Missing environment variable: dingen_agent_id"</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">AIProjectClient</span><span class="p">(</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">"dingen_azure_endpoint"</span><span class="p">),</span>
+            <span class="n">credential</span><span class="o">=</span><span class="n">DefaultAzureCredential</span><span class="p">(),</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s">"Failed to create Azure client: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="s">"chat_history"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">:</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">[</span><span class="s">"chat_history"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">user_input</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">chat_input</span><span class="p">(</span>
+        <span class="s">"Hi! Let's plan your dinners 😀. Enter your requests here ..."</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">user_input</span><span class="p">:</span>
+        <span class="c1"># Display user message in chat
+</span>        <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">[</span><span class="s">"chat_history"</span><span class="p">].</span><span class="n">append</span><span class="p">((</span><span class="s">"user"</span><span class="p">,</span> <span class="n">user_input</span><span class="p">))</span>
+        <span class="c1"># Send user message to agent and get a response
+</span>        <span class="n">thread_id</span><span class="p">,</span> <span class="n">run_id</span> <span class="o">=</span> <span class="n">utils</span><span class="p">.</span><span class="n">send_user_message</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">user_input</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">thread_id</span> <span class="ow">and</span> <span class="n">run_id</span><span class="p">:</span>
+            <span class="n">responses</span> <span class="o">=</span> <span class="n">utils</span><span class="p">.</span><span class="n">get_responses</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">thread_id</span><span class="p">,</span> <span class="n">run_id</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">responses</span><span class="p">:</span>
+                <span class="c1"># Append response to chat history
+</span>                <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">[</span><span class="s">"chat_history"</span><span class="p">].</span><span class="n">append</span><span class="p">((</span><span class="s">"assistant"</span><span class="p">,</span> <span class="n">response</span><span class="p">))</span>
+            <span class="c1"># Display chat history
+</span>            <span class="k">for</span> <span class="n">role</span><span class="p">,</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">[</span><span class="s">"chat_history"</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="s">"user"</span><span class="p">:</span>
+                    <span class="n">st</span><span class="p">.</span><span class="n">chat_message</span><span class="p">(</span><span class="s">"user"</span><span class="p">).</span><span class="n">markdown</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">st</span><span class="p">.</span><span class="n">chat_message</span><span class="p">(</span><span class="s">"assistant"</span><span class="p">).</span><span class="n">markdown</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>A step by step explanation to app process flow:</p>
+<ul>
+  <li>Line 2: Check if the code runs locally or remote by calling the <code class="language-plaintext highlighter-rouge">is_local()</code> function from <code class="language-plaintext highlighter-rouge">utils.py</code>. If local, load environment variables from the <code class="language-plaintext highlighter-rouge">.env</code> file.</li>
+  <li>Line 6: Set title and browser tab favicon emoji.</li>
+  <li>Line 8: Apply styling and prettify the looks. The files can be found in the repo linked above.</li>
+  <li>Line 11: Create a sidebar with a <code class="language-plaintext highlighter-rouge">reset conversation</code> button: Sometimes the user wants to start a new conversation with the agent. This can be due to various reasons. For example, the user wants to change the topic, or the agent has gone off track. The button allows the user to reset the conversation while keeping the app session alive. The following actions are taken when the button is clicked:
+    <ul>
+      <li>Line 16: Delete conversation related keys which are generated in an app session state.</li>
+      <li>Line 19: Set chat history to empty, as we are creating a new conversation.</li>
+      <li>Line 21: Ensure immediate app re-run.</li>
+    </ul>
+  </li>
+  <li>Main app panel:
+    <ul>
+      <li>Line 24: Set main title.</li>
+      <li>Line 26: Get agent id from the <code class="language-plaintext highlighter-rouge">.env</code> file.</li>
+      <li>Line 28: If no id provided, send error warning.</li>
+      <li>Line 32: Try/except: create a project client by implementing code from Azure Python SDK documentation linked above.</li>
+      <li>Line 41: As the app renders multiple times during an app session, the check for <code class="language-plaintext highlighter-rouge">chat_history</code> runs multiple times. For the very first rendering the list does not exist, so we allocate the empty <code class="language-plaintext highlighter-rouge">chat_history</code> list. Streamlit app re-runs and checks <code class="language-plaintext highlighter-rouge">st.session_state</code> in the following cases:
+        <ul>
+          <li>Initial page load - First time user visits the app</li>
+          <li>Every user interaction - Button clicks, text input, slider changes, etc.</li>
+          <li>Widget state changes - When any widget value changes</li>
+          <li>Manual reruns - When you call st.rerun() or st.experimental_rerun()</li>
+          <li>File changes (development only) - When you save the .py file (if running locally)</li>
+        </ul>
+      </li>
+      <li>Line 44: Add streamlit widget <code class="language-plaintext highlighter-rouge">st.chat_input()</code>, a user input panel for chatting.</li>
+      <li>Line 48: See the comments for detailed explanation of the combination of if-tests, for loops and if-else tests.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="utility-functions">Utility functions</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">utils.py</code> file contains utility functions that are used in the main app code. Below I will explain each function in detail.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="c1">#utils.py - package imports
+</span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="n">st</span>
+<span class="kn">from</span> <span class="nn">azure.ai.agents.models</span> <span class="kn">import</span> <span class="n">ListSortOrder</span>
+<span class="kn">from</span> <span class="nn">azure.ai.projects</span> <span class="kn">import</span> <span class="n">AIProjectClient</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The package imports are similar to those in the main app code, with the addition of <code class="language-plaintext highlighter-rouge">ListSortOrder</code> from <code class="language-plaintext highlighter-rouge">azure.ai.agents.models</code>, which is used to sort messages when retrieving them from the agent.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="c1">#utils.py 
+</span><span class="k">def</span> <span class="nf">is_local</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="s">"""Return True when running in a local/dev environment."""</span>
+    <span class="n">is_deployed</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"DEPLOYED"</span><span class="p">)</span> <span class="o">==</span> <span class="s">"1"</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="s">".env"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">is_deployed</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>As mentioned in the package imports and setup section, the <code class="language-plaintext highlighter-rouge">is_local()</code> function serves for environment detection, local or remote.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre></td><td class="code"><pre><span class="c1">#utils.py
+</span><span class="k">def</span> <span class="nf">send_user_message</span><span class="p">(</span>
+    <span class="n">client</span><span class="p">:</span> <span class="n">AIProjectClient</span><span class="p">,</span> <span class="n">agent_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user_message</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="bp">None</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="bp">None</span><span class="p">]:</span>
+    <span class="s">"""Post a user message to an existing thread (or create one) and start a run.
+
+    This function stores thread and run identifiers in Streamlit ``session_state``
+    so that the conversation persists across reruns.
+
+    Args:
+        client: An initialized Azure AIProjectClient.
+        agent_id: The agent identifier to run.
+        user_message: The user's message to post.
+
+    Returns:
+        A tuple (thread_id, run_id). Either may be None on failure.
+    """</span>
+    <span class="c1"># create thread once per session
+</span>    <span class="k">if</span> <span class="s">"thread_id"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">:</span>
+        <span class="n">thread</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">agents</span><span class="p">.</span><span class="n">threads</span><span class="p">.</span><span class="n">create</span><span class="p">()</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">[</span><span class="s">"thread_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">thread</span><span class="p">.</span><span class="nb">id</span>
+
+    <span class="c1"># post user message to that thread
+</span>    <span class="n">client</span><span class="p">.</span><span class="n">agents</span><span class="p">.</span><span class="n">messages</span><span class="p">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">thread_id</span><span class="o">=</span><span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">[</span><span class="s">"thread_id"</span><span class="p">],</span>
+        <span class="n">role</span><span class="o">=</span><span class="s">"user"</span><span class="p">,</span>
+        <span class="n">content</span><span class="o">=</span><span class="n">user_message</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># create and process a run for that message
+</span>    <span class="n">run</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">agents</span><span class="p">.</span><span class="n">runs</span><span class="p">.</span><span class="n">create_and_process</span><span class="p">(</span>
+        <span class="n">thread_id</span><span class="o">=</span><span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">[</span><span class="s">"thread_id"</span><span class="p">],</span>
+        <span class="n">agent_id</span><span class="o">=</span><span class="n">agent_id</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">[</span><span class="s">"run_id"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s">"id"</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"thread_id"</span><span class="p">),</span> <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"run_id"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The <code class="language-plaintext highlighter-rouge">send_user_message()</code> function implements the Azure Python SDK methods described in the <a href="https://learn.microsoft.com/en-us/azure/ai-foundry/quickstarts/get-started-code?tabs=python">Azure documentation</a> to connect to the given agent,
+create a new thread and run, and returns the <code class="language-plaintext highlighter-rouge">thread_id</code> and <code class="language-plaintext highlighter-rouge">run_id</code> back to the main app function.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="code"><pre><span class="c1">#utils.py
+</span><span class="k">def</span> <span class="nf">get_responses</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AIProjectClient</span><span class="p">,</span> <span class="n">thread_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="s">"""Fetch assistant responses for a given thread/run.
+
+    Args:
+        client: An initialized Azure AIProjectClient.
+        thread_id: The thread identifier.
+        run_id: The run identifier to filter messages by.
+
+    Returns:
+        A list of response strings (may be empty).
+    """</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">agents</span><span class="p">.</span><span class="n">messages</span><span class="p">.</span><span class="nb">list</span><span class="p">(</span>
+        <span class="n">thread_id</span><span class="o">=</span><span class="n">thread_id</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">ListSortOrder</span><span class="p">.</span><span class="n">ASCENDING</span>
+    <span class="p">)</span>
+    <span class="n">responses</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s">"run_id"</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="o">==</span> <span class="n">run_id</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span>
+            <span class="n">message</span><span class="p">,</span> <span class="s">"text_messages"</span><span class="p">,</span> <span class="bp">None</span>
+        <span class="p">):</span>
+            <span class="c1"># append the final text value for the message if present
+</span>            <span class="n">text_obj</span> <span class="o">=</span> <span class="n">message</span><span class="p">.</span><span class="n">text_messages</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">text</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">text_obj</span><span class="p">,</span> <span class="s">"value"</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+                <span class="n">responses</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">responses</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The <code class="language-plaintext highlighter-rouge">get_responses()</code> function creates a list of messages in the current <code class="language-plaintext highlighter-rouge">run_id</code> and <code class="language-plaintext highlighter-rouge">thread_id</code>, appends the message if there is one, and returns the list of agent responses.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="c1">#utils.py
+</span><span class="k">def</span> <span class="nf">safe_rerun</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="s">"""Attempt to rerun the Streamlit app, with a safe fallback."""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">experimental_rerun</span><span class="p">()</span>
+    <span class="k">except</span> <span class="nb">Exception</span><span class="p">:</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The <code class="language-plaintext highlighter-rouge">safe_rerun()</code> function ensures a safe re-run of the application when the user clicks the 
+<code class="language-plaintext highlighter-rouge">Reset conversation</code> button in the left sidebar panel.</p>
+
+<hr />
+
+<h3 id="environment-variables">Environment variables</h3>
+
+<p>In order to connect to the correct Azure AI Foundry project and to the correct agent within the project, we need two environment variables:</p>
+
+<ul>
+  <li>Azure AI Foundry project endpoint: in my code called <code class="language-plaintext highlighter-rouge">dingen_azure_endpoint</code>.</li>
+  <li>Azure AI Foundry Agent id: in my code called <code class="language-plaintext highlighter-rouge">dingen_agent_id</code>.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">dingen</code> is an abbreviation for dinner generator. A brief comment on lower case for environment variables: usually they are set in upper case, but as you will see in the upcoming article on app deployment, I use Azure Vault to store the secrets, and it is easier to keep the naming consistent across local and remote setups.</p>
+
+<p>In the Azure AI Foundry portal, you find the endpoint and id values here:</p>
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
+
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<div class="main-carousel" data-flickity="{ &quot;cellAlign&quot;: &quot;left&quot;, &quot;contain&quot;: true, &quot;wrapAround&quot;: true }">
+  <div class="carousel-cell">
+    <img src="/assets/images/2025-10-15-ai-agents-and-streamlit/az_project_endpoint.png" alt="Step 1" />
+    <p>1. Where to find the project endpoint.</p>
+  </div>
+  
+  <div class="carousel-cell">
+    <img src="/assets/images/2025-10-15-ai-agents-and-streamlit/az_agent_id.png" alt="Step 2" />
+    <p>2. Where to find the agent id.</p>
+  </div>
+</div>
+
+<p>Create an <code class="language-plaintext highlighter-rouge">.env</code> file in the project’s root directory, and copy and paste the values from the portal into the file, so the <code class="language-plaintext highlighter-rouge">is_local()</code> function finds the environment variables on app run.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="c1">#.env
+</span><span class="n">dingen_azure_endpoint</span> <span class="o">=</span> <span class="n">paste</span> <span class="n">value</span> <span class="n">here</span>
+<span class="n">dingen_agent_id</span> <span class="o">=</span> <span class="n">paste</span> <span class="n">value</span> <span class="n">here</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<hr />
+
+<h3 id="final-result">Final result</h3>
+
+<p>Start the application by running the following line in terminal:</p>
+
+<p><code class="language-plaintext highlighter-rouge">streamlit run app.py</code>.</p>
+
+<p>The app should by default pop up in your active browser on <code class="language-plaintext highlighter-rouge">localhost:8501</code>.</p>
+
+<p><img src="/assets/images/2025-10-15-ai-agents-and-streamlit/app_final_result.png" alt="Azure AI Foundry Portal" />
+<em>Figure: Final result of the prototype application with initial agent interaction.</em></p>
+
+<h1 id="first-impression-of-azure-python-sdk-state-of-maturity-and-further-steps">First impression of Azure Python SDK state of maturity and further steps</h1>
+<p>Here I will share my first impression of the Azure Python SDK for AI Foundry, based on my hands-on experience described above.</p>
+
+<p><strong>What worked well:</strong></p>
+
+<ul>
+  <li>Easy to get started.</li>
+  <li>Decent code documentation for Python.</li>
+  <li>A lot of available information and opportunities for versatile agent capabilities.</li>
+  <li>The code runs as intended. At this stage I did not experience bugs or glitches.</li>
+</ul>
+
+<p><strong>Difficulties I ran into:</strong></p>
+
+<ul>
+  <li>Nothing to mention at this stage, but I will update this section in upcoming posts as I dive deeper into the SDK capabilities.</li>
+</ul>
+
+<p>I hope you were able to run your own app locally and upskilled your agentic abilities with me.
+See you in the next one 🩵!</p>
+
+<hr />
+
+<p><em>Transparency note: This article is human-written with AI assistance for proofreading and typo correction. Main image generated with AI.</em></p>
+
+<hr />
+<p><strong><a href="#top">🔝 Back to top 🔝</a></strong></p>
+
+<!-- Giscus Comments -->
+<div class="giscus-comments">
+  <script src="https://giscus.app/client.js" data-repo="auroravoje/auroravoje.github.io" data-repo-id="R_kgDOP_2Vug" data-category="General" data-category-id="DIC_kwDOP_2Vus4CxgOZ" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="1" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async="">
+  </script>
+</div>
+
+<style>
+.giscus-comments {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e1e4e8;
+}
+</style>
+
+<style>
+.main-carousel {
+  margin: 20px 0;
+}
+
+.carousel-cell {
+  width: 80%;
+  margin-right: 15px;
+  text-align: center;
+  counter-increment: carousel-cell;
+}
+
+.carousel-cell img {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  min-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+  margin: 0 auto;
+}
+
+.carousel-cell img:hover {
+  transform: scale(1.5);
+}
+
+.carousel-cell p {
+  margin-top: 10px;
+  font-style: italic;
+  color: #666;
+}
+
+/* Fix for GitHub Pages theme conflicts */
+.main-carousel .flickity-viewport {
+  height: auto !important;
+  min-height: 500px;
+}
+
+.main-carousel .flickity-slider {
+  height: auto !important;
+}
+</style>
+
+
+
+      <footer class="site-footer">
+        
+          <span class="site-footer-owner"><a href="https://github.com/auroravoje/auroravoje.github.io">auroravoje.github.io</a> is maintained by <a href="https://github.com/auroravoje">auroravoje</a>.</span>
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>
