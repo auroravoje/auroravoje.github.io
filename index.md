@@ -10,7 +10,7 @@ title: Luminous Algorithms - Aurora's AI Atelier
 
 This is my GitHub Pages site about AI and data science. 
 
-It's currently under construction - exciting content coming soon.
+Some pages are currently under construction - exciting content coming soon.
 
 ## Navigation
 - [About Me](/about/)
@@ -18,7 +18,7 @@ It's currently under construction - exciting content coming soon.
 - [Projects](/projects/)
 
 ## Latest Posts
-{% for post in site.posts limit:5 %}
+{% for post in site.posts limit:10 %}
 - [{{ post.title }}]({{ post.url }}) - {{ post.date | date: "%B %d, %Y" }}
 {% endfor %}
 
